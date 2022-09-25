@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 
 @Controller
@@ -23,17 +22,16 @@ public class PictureController {
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView("/picture");
         modelAndView.addObject("comment",new Comment());
+        modelAndView.addObject("listComment",commentService.findAll());
         return modelAndView;
     }
 
     @PostMapping("/create")
     public ModelAndView createComment(@ModelAttribute("comment") Comment comment){
-        Date date = new Date(String.valueOf(LocalDate.now()));
-        comment.setDate(date);
+        comment.setDate(LocalDate.now());
         commentService.save(comment);
         ModelAndView modelAndView = new ModelAndView("/picture");
-        Date date1 = java.sql.Date.valueOf(LocalDate.now());
-        modelAndView.addObject("listComment",commentService.findCommentByDate(date1));
+        modelAndView.addObject("listComment",commentService.findAll());
         return modelAndView;
     }
 

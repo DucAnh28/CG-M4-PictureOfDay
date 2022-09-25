@@ -22,6 +22,8 @@
         <table>
             <tr>
                 <td>Point</td>
+            </tr>
+            <tr>
                 <td><label>
                     <select th:field="*{point}">
                         <option value="1">1</option>
@@ -33,21 +35,36 @@
                 </label></td>
             </tr>
             <tr>
-                <td>
-                    <label>
-                        <input th:field="*{author}" type="text">
-                    </label></td>
+                <td>Author</td>
+            </tr>
+            <tr>
+                <td><label>
+                    <input th:field="*{author}" type="text">
+                </label></td>
+            </tr>
+            <tr>
+                <td>Feedback</td>
             </tr>
             <tr>
                 <td><textarea th:field="*{feedback}"></textarea></td>
             </tr>
-            <tr><td>
-            <label>
-                <input type="submit" value="comment">
-            </label></td></tr>
+            <tr>
+                <td><label>
+                    <input type="submit" value="comment">
+                </label></td>
+            </tr>
         </table>
     </form>
 </div>
+<div>
+    <table th:each="yolo : ${listComment}">
+        <tr>
+            <td th:text=" '+'+${yolo.getPoint()}"></td>
+            <td th:text ="${yolo.getFeedback()}"></td>
+        </tr>
+    </table>
+</div>
+
 </body>
 <script>
     let query = 'https://api.nasa.gov/planetary/apod?api_key=3cjIi248LVEvp5ffsSw8JTod6uMmZINZx3YM2jTb';

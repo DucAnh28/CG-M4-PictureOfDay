@@ -1,7 +1,7 @@
 package com.ducanhpro.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "comments")
@@ -12,7 +12,7 @@ public class Comment {
     private String author;
     private int point;
     private String feedback;
-    private Date date;
+    private LocalDate date;
     private int likeOfComment;
 
     public Comment() {
@@ -66,11 +66,11 @@ public class Comment {
         this.likeOfComment = likeOfComment;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }
