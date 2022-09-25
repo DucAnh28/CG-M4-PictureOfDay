@@ -3,6 +3,8 @@ package com.ducanhpro.service;
 import com.ducanhpro.model.Comment;
 import com.ducanhpro.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -12,6 +14,11 @@ import java.util.Optional;
 public class CommentService implements ICommentService {
     @Autowired
     private CommentRepository commentRepository;
+
+    @Override
+    public Page<Comment> findCommentByDate(LocalDate date, Pageable pageable) {
+        return commentRepository.findCommentByDate(date,pageable);
+    }
 
     @Override
     public Iterable<Comment> findCommentByDate(LocalDate date) {
