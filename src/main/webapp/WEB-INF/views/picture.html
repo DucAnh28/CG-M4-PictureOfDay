@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Comment</title>
+</head>
+<style>
+    img {
+        text-align: center;
+        /*position: absolute;*/
+        /*left: 17%;*/
+        width: 1000px;
+        height: 800px;
+    }
+</style>
+<body>
+<div>
+    <p><img id="img-of-the-day"></p>
+</div>
+<div>
+    <form th:object="${comment}" method="post" action="/create">
+        <table>
+            <tr>
+                <td>Point</td>
+                <td><label>
+                    <select th:field="*{point}">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </label></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <input th:field="*{author}" type="text">
+                    </label></td>
+            </tr>
+            <tr>
+                <td><textarea th:field="*{feedback}"></textarea></td>
+            </tr>
+            <tr><td>
+            <label>
+                <input type="submit" value="comment">
+            </label></td></tr>
+        </table>
+    </form>
+</div>
+</body>
+<script>
+    let query = 'https://api.nasa.gov/planetary/apod?api_key=3cjIi248LVEvp5ffsSw8JTod6uMmZINZx3YM2jTb';
+    let request = new XMLHttpRequest();
+    request.open('GET', query);
+    request.onload = function () {
+        if (request.status === 200) {
+            let response = JSON.parse(request.responseText);
+            document.getElementById('img-of-the-day').setAttribute('src', response.url);
+        }
+    };
+    request.send();
+</script>
+</html>
